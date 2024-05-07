@@ -39,21 +39,32 @@ app.use(express.json());
 // Route to handle storing user data along with image upload
 app.post('/api/register', upload.single('file'), async (req, res) => {
   try {
-    const base64String = req.file.buffer.toString('base64');
-    // Upload base64 image to Cloudinary
-    const result = await cloudinary.uploader.upload(`data:${req.file.mimetype};base64,${base64String}`);
-
-    // Create new user
-    const newUser = new User({ 
-      name: req.body.name,
-      email: req.body.email,
-      mobile: req.body.mobile,
-      city: req.body.city,
-      handset: req.body.handset,
-      tenure: req.body.tenure,
-      source: req.body.source,
-      imageUrl: result.secure_url
-    });
+    if(req.file){
+      const base64String = req.file.buffer.toString('base64');
+      // Upload base64 image to Cloudinary
+      const result = await cloudinary.uploader.upload(`data:${req.file.mimetype};base64,${base64String}`);
+      // Create new user
+      const newUser = new User({ 
+        name: req.body.name,
+        email: req.body.email,
+        mobile: req.body.mobile,
+        city: req.body.city,
+        handset: req.body.handset,
+        tenure: req.body.tenure,
+        source: req.body.source,
+        imageUrl: result.secure_url
+      });
+    }else{
+      const newUser = new User({ 
+        name: req.body.name,
+        email: req.body.email,
+        mobile: req.body.mobile,
+        city: req.body.city,
+        handset: req.body.handset,
+        tenure: req.body.tenure,
+        source: req.body.source
+      });
+    }
 
     // Save user to MongoDB
     await newUser.save();

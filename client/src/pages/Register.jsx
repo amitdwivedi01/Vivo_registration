@@ -23,10 +23,27 @@ const Register = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+  
+    // Check if the input is for the mobile number field
+    if (name === "mobile") {
+      // If the input length is more than 10, truncate it to 10 characters
+      if (value.length > 10) {
+        setFormData(prevState => ({
+          ...prevState,
+          [name]: value.slice(0, 10) // Only take the first 10 characters
+        }));
+      } else {
+        setFormData(prevState => ({
+          ...prevState,
+          [name]: value
+        }));
+      }
+    } else {
+      setFormData(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
+    }
   };
 
   const handleFileChange = (e) => {
@@ -44,6 +61,10 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.mobile.length < 10) {
+      alert('Please fill in a 10-digit mobile number.');
+      return; // Prevent form submission
+    }
     setIsLoading(true);
     
     try {
@@ -57,7 +78,7 @@ const Register = () => {
       NewFormData.append('source', formData.source);
       NewFormData.append('file', formData.file);
       
-      const response = await axios.post('http://localhost:5000/api/register', NewFormData);
+      const response = await axios.post('https://beautiful-sarong-toad.cyclic.app/api/register', NewFormData);
       
       if (response.status === 201) {
         setShowModal(true);
