@@ -78,7 +78,7 @@ const Register = () => {
       NewFormData.append('source', formData.source);
       NewFormData.append('file', formData.file);
       
-      const response = await axios.post('https://beautiful-sarong-toad.cyclic.app/api/register', NewFormData);
+      const response = await axios.post('/api/register', NewFormData);
       
       if (response.status === 201) {
         setShowModal(true);

@@ -54,6 +54,8 @@ app.post('/api/register', upload.single('file'), async (req, res) => {
         source: req.body.source,
         imageUrl: result.secure_url
       });
+        // Save user to MongoDB
+    await newUser.save();
     }else{
       const newUser = new User({ 
         name: req.body.name,
@@ -64,10 +66,10 @@ app.post('/api/register', upload.single('file'), async (req, res) => {
         tenure: req.body.tenure,
         source: req.body.source
       });
-    }
 
-    // Save user to MongoDB
+        // Save user to MongoDB
     await newUser.save();
+    }  
 
     res.status(201).json({ message: 'Data stored successfully', imageUrl: result.secure_url });
   } catch (error) {
