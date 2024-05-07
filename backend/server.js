@@ -38,8 +38,9 @@ app.use(express.json());
 
 // Route to handle storing user data along with image upload
 app.post('/api/register', upload.single('file'), async (req, res) => {
-  try {
+  try {    
     if(req.file){
+      console.log('this is hit')
       const base64String = req.file.buffer.toString('base64');
       // Upload base64 image to Cloudinary
       const result = await cloudinary.uploader.upload(`data:${req.file.mimetype};base64,${base64String}`);
@@ -57,6 +58,7 @@ app.post('/api/register', upload.single('file'), async (req, res) => {
         // Save user to MongoDB
     await newUser.save();
     }else{
+      console.log("that is hit")
       const newUser = new User({ 
         name: req.body.name,
         email: req.body.email,
@@ -71,7 +73,7 @@ app.post('/api/register', upload.single('file'), async (req, res) => {
     await newUser.save();
     }  
 
-    res.status(201).json({ message: 'Data stored successfully', imageUrl: result.secure_url });
+    res.status(201).json({ message: 'Data stored successfully'});
   } catch (error) {
     console.error('Error storing user data:', error);
     res.status(500).json({ error: 'Error storing user data' });
