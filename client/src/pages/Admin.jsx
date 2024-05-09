@@ -20,7 +20,7 @@ const Admin = () => {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const response = await axios.get("https://beautiful-sarong-toad.cyclic.app/api/users");
+        const response = await axios.get("http://localhost:5000/api/users");
         if (response.status === 200) {
           setUserData(response.data);
           const cities = [...new Set(response.data.map(user => user.city))];
@@ -72,7 +72,6 @@ const Admin = () => {
                       className="w-[100px] rounded-md"
                     />
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user._id}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.mobile}</td>

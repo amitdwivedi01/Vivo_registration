@@ -28,12 +28,28 @@ const Register = () => {
   const [showModal, setShowModal] = useState(false);
   const Navigate = useNavigate();
 
+  // Check if the input is for the mobile number field
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+    if (name === "mobile") {
+      // If the input length is more than 10, truncate it to 10 characters
+      if (value.length > 10) {
+        setFormData(prevState => ({
+          ...prevState,
+          [name]: value.slice(0, 10) // Only take the first 10 characters
+        }));
+      } else {
+        setFormData(prevState => ({
+          ...prevState,
+          [name]: value
+        }));
+      }
+    } else {
+      setFormData(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
+    }
   };
 
   const handleFileChange = (e) => {
@@ -116,9 +132,9 @@ const Register = () => {
             <label htmlFor="name">Name:</label>
             <TextInput type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Enter your name" required />
           </div>
-          <div>
+          <div className='flex flex-col gap-1'>
             <label htmlFor="age">Age:</label>
-            <select id="age" name="age" value={formData.age} onChange={handleChange} required>
+            <select id="age" name="age" value={formData.age} onChange={handleChange}>
               <option value="" disabled>Select age group</option>
               <option value="14-20 Years">14-20 Years</option>
               <option value="21-25 Years">21-25 Years</option>
@@ -129,9 +145,9 @@ const Register = () => {
               <option value="50 and above">50 and above</option>
             </select>
           </div>
-          <div>
+          <div className='flex flex-col gap-1'>
             <label htmlFor="gender">Gender:</label>
-            <select id="gender" name="gender" value={formData.gender} onChange={handleChange} required>
+            <select id="gender" name="gender" value={formData.gender} onChange={handleChange}>
               <option value="" disabled>Select gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
@@ -139,19 +155,19 @@ const Register = () => {
           </div>
           <div>
             <label htmlFor="profession">Profession:</label>
-            <TextInput type="text" id="profession" name="profession" value={formData.profession} onChange={handleChange} placeholder="Enter your profession" required />
+            <TextInput type="text" id="profession" name="profession" value={formData.profession} onChange={handleChange} placeholder="Enter your profession"  />
           </div>
           <div>
             <label htmlFor="email">E-mail:</label>
-            <TextInput type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="Enter your email" required />
+            <TextInput type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="Enter your email" />
           </div>
           <div>
             <label htmlFor="mobile">Mobile No.:</label>
             <TextInput type="number" id="mobile" name="mobile" value={formData.mobile} onChange={handleChange} placeholder="Enter your mobile number" required />
           </div>
-          <div>
+          <div className='flex flex-col gap-1'>
             <label htmlFor="handset">Current Phone:</label>
-            <select id="handset" name="handset" value={formData.handset} onChange={handleChange} required>
+            <select id="handset" name="handset" value={formData.handset} onChange={handleChange} >
               <option value="" disabled>Select your current phone</option>
               <option value="Apple">Apple</option>
               <option value="vivo">vivo</option>
@@ -169,7 +185,7 @@ const Register = () => {
               <option value="Others">Others</option>
             </select>
           </div>
-          <div>
+          <div className='flex flex-col gap-1'>
             <label htmlFor="city">City:</label>
             <select id="city" name="city" value={formData.city} onChange={handleChange} required>
               <option value="" disabled>Select your city</option>
@@ -178,9 +194,9 @@ const Register = () => {
               ))}
             </select>
           </div>
-          <div>
+          <div className='flex flex-col gap-1'>
             <label htmlFor="attraction">What attracted you to the activity?</label>
-            <select id="attraction" name="attraction" value={formData.attraction} onChange={handleChange} required>
+            <select id="attraction" name="attraction" value={formData.attraction} onChange={handleChange}>
               <option value="" disabled>Select attraction</option>
               <option value="Setup Design">Setup Design</option>
               <option value="Planar Photo Op">Planar Photo Op</option>
@@ -192,25 +208,25 @@ const Register = () => {
               <option value="Zeiss logo">Zeiss logo</option>
             </select>
           </div>
-          <div>
+          <div className='flex flex-col gap-1'>
             <label htmlFor="usedVivoBefore">Have you used vivo before?</label>
-            <select id="usedVivoBefore" name="usedVivoBefore" value={formData.usedVivoBefore} onChange={handleChange} required>
+            <select id="usedVivoBefore" name="usedVivoBefore" value={formData.usedVivoBefore} onChange={handleChange} >
               <option value="" disabled>Select option</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select>
           </div>
-          <div>
+          <div className='flex flex-col gap-1'>
             <label htmlFor="cameraModulePreference">Which camera module do you like the most in V30 series?</label>
-            <select id="cameraModulePreference" name="cameraModulePreference" value={formData.cameraModulePreference} onChange={handleChange} required>
+            <select id="cameraModulePreference" name="cameraModulePreference" value={formData.cameraModulePreference} onChange={handleChange} >
               <option value="" disabled>Select preference</option>
               <option value="Round Camera">Round Camera</option>
               <option value="Square Camera">Square Camera</option>
             </select>
           </div>
-          <div>
+          <div className='flex flex-col gap-1'>
             <label htmlFor="favoriteFeatureV30e">Which feature of V30e do you like the most?</label>
-            <select id="favoriteFeatureV30e" name="favoriteFeatureV30e" value={formData.favoriteFeatureV30e} onChange={handleChange} required>
+            <select id="favoriteFeatureV30e" name="favoriteFeatureV30e" value={formData.favoriteFeatureV30e} onChange={handleChange} >
               <option value="" disabled>Select favorite feature</option>
               <option value="Gem Cut Camera Module">Gem Cut Camera Module</option>
               <option value="5500 mAh Battery">5500 mAh Battery</option>
@@ -218,9 +234,9 @@ const Register = () => {
               <option value="Studio-Quality Aura Light">Studio-Quality Aura Light</option>
             </select>
           </div>
-          <div>
+          <div className='flex flex-col gap-1'>
             <label htmlFor="portraitExperience">As compared to your current handset, did you get a better portrait experience?</label>
-            <select id="portraitExperience" name="portraitExperience" value={formData.portraitExperience} onChange={handleChange} required>
+            <select id="portraitExperience" name="portraitExperience" value={formData.portraitExperience} onChange={handleChange} >
               <option value="" disabled>Select experience</option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
@@ -228,9 +244,9 @@ const Register = () => {
               <option value="Similar Only">Similar Only</option>
             </select>
           </div>
-          <div>
+          <div className='flex flex-col gap-1'>
             <label htmlFor="standoutFeature">What feature of the product stood out to you the most?</label>
-            <select id="standoutFeature" name="standoutFeature" value={formData.standoutFeature} onChange={handleChange} required>
+            <select id="standoutFeature" name="standoutFeature" value={formData.standoutFeature} onChange={handleChange} >
               <option value="" disabled>Select standout feature</option>
               <option value="Ultra Slim 3D Curved Display">Ultra Slim 3D Curved Display</option>
               <option value="Colour">Colour</option>
@@ -238,10 +254,10 @@ const Register = () => {
               <option value="Processor">Processor</option>
             </select>
           </div>
-          <div>
+          {/* <div>
             <label htmlFor="file">Upload Image:</label>
             <input type="file" id="file" accept="image/*" onChange={handleFileChange} />
-          </div>
+          </div> */}
           {
             isLoading ?
             <Button className='bg-blue-600 hover:bg-blue-800' disabled> {<Spinner />} </Button> :
