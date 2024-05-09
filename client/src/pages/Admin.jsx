@@ -77,6 +77,7 @@ const Admin = () => {
                   <td className="px-6 py-4 whitespace-nowrap">{user.mobile}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.city}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.handset}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.attractFeature}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.tenure}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.source}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.age}</td>

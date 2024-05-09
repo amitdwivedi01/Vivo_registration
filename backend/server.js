@@ -64,6 +64,7 @@ app.post('/api/register', upload.single('file'), async (req, res) => {
       favoriteFeatureV30e: req.body.favoriteFeatureV30e,
       portraitExperience: req.body.portraitExperience,
       standoutFeature: req.body.standoutFeature,
+      attractFeature:req.body.attractFeature,
       imageUrl: imageUrl
     });
 

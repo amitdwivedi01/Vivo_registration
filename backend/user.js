@@ -45,6 +45,9 @@ const userSchema = new mongoose.Schema({
   standoutFeature: {
     type: String,
   },
+  attractFeature:{
+    type: String,
+  },
   imageUrl: {
     type: String,
   }

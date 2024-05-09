@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../assets/vivo_logo.png';
 
-const citiesInIndia = ['Delhi', 'Mumbai', 'Kolkata', 'Chennai', 'Bangalore', 'Hyderabad', 'Pune', 'Ahmedabad', 'Jaipur', 'Surat'];
+const citiesInIndia = ['Agra', 'Ahmeddabad', 'Ajmer', 'Amritsar', 'Amravati', 'Aurangabad', 'Baroda', 'Bangalore', 'Bhopal', 'Bhubaneswar',"Chandigarh","Chennai","Coimbatore","Cuttack","Dehradun","Delhi","Dhanbad","Faridabad","Ghaziabad","Goa","Gorakhpur","Gurugram","Guwahati","Hyderbad","Indore","Jaipur","Jalandar","Jammu","Jamshedpur","Jodhpur","Kanpur","kochi","Kolkata","Kota","Kozhikode","Lucknow","Ludhiana","Madhurai","Manglore","Meerut","Mohali","Mumbai","Mysore","Nagpur","Navi Mumbai","Noida","Patna","Pune","Raipur","Rajkot","Ranchi","Sant kabir Nagar","Sant Ravidas Nagar","Satara","Satna","Shajapur","Shamli","Shimla","Shivpuri","Siddhartnagar","Singrauli","Sirmaur","Sitapur","Solan","Solapur","Sonbhadra","Sonipat","Srinagar","Sultanpur","Surat","Thane","Thiruvananthapura","Tiruchirappalli","Tirupur","udaipur","Udhampur","Udupi","Ujjain","Unnao","Vadodara","Vaishali","Varanasi","Vellore","Vidisha","Vijaywada","Visakhapatnam","Yamuna Nagar"];
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +22,7 @@ const Register = () => {
     favoriteFeatureV30e: '',
     portraitExperience: '',
     standoutFeature: '',
+    attractFeature:"",
     file: null
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -103,6 +104,7 @@ const Register = () => {
         favoriteFeatureV30e: '',
         portraitExperience: '',
         standoutFeature: '',
+        attractFeature:"",
         file: null
       });
     } catch (error) {
@@ -166,6 +168,15 @@ const Register = () => {
             <TextInput type="number" id="mobile" name="mobile" value={formData.mobile} onChange={handleChange} placeholder="Enter your mobile number" required />
           </div>
           <div className='flex flex-col gap-1'>
+            <label htmlFor="city">City:</label>
+            <select id="city" name="city" value={formData.city} onChange={handleChange} required>
+              <option value="" disabled>Select your city</option>
+              {citiesInIndia.map(city => (
+                <option key={city} value={city}>{city}</option>
+              ))}
+            </select>
+          </div>
+          <div className='flex flex-col gap-1'>
             <label htmlFor="handset">Current Phone:</label>
             <select id="handset" name="handset" value={formData.handset} onChange={handleChange} >
               <option value="" disabled>Select your current phone</option>
@@ -186,14 +197,20 @@ const Register = () => {
             </select>
           </div>
           <div className='flex flex-col gap-1'>
-            <label htmlFor="city">City:</label>
-            <select id="city" name="city" value={formData.city} onChange={handleChange} required>
-              <option value="" disabled>Select your city</option>
-              {citiesInIndia.map(city => (
-                <option key={city} value={city}>{city}</option>
-              ))}
+            <label htmlFor="attractFeature">Which feature of the phone attracts you while making purchase decision?</label>
+            <select id="attractFeature" name="attractFeature" value={formData.attractFeature} onChange={handleChange} >
+              <option value="" disabled>Select your current phone</option>
+              <option value="Design">Design</option>
+              <option value="Brand">Brand</option>
+              <option value="Camera">Camera</option>
+              <option value="Processor">Processor</option>
+              <option value="Security">Security</option>
+              <option value="Battery">Battery</option>
+              <option value="Colour">Colour</option>
+              <option value="Water-resistant">Water-resistant</option>
             </select>
           </div>
+          
           <div className='flex flex-col gap-1'>
             <label htmlFor="attraction">What attracted you to the activity?</label>
             <select id="attraction" name="attraction" value={formData.attraction} onChange={handleChange}>
@@ -245,13 +262,12 @@ const Register = () => {
             </select>
           </div>
           <div className='flex flex-col gap-1'>
-            <label htmlFor="standoutFeature">What feature of the product stood out to you the most?</label>
+            <label htmlFor="standoutFeature">Which camera did you like the most for photography?</label>
             <select id="standoutFeature" name="standoutFeature" value={formData.standoutFeature} onChange={handleChange} >
-              <option value="" disabled>Select standout feature</option>
-              <option value="Ultra Slim 3D Curved Display">Ultra Slim 3D Curved Display</option>
-              <option value="Colour">Colour</option>
-              <option value="50MP (Sony IMX882) Camera">50MP (Sony IMX882) Camera</option>
-              <option value="Processor">Processor</option>
+              <option value="" disabled>Select camera you like for photography</option>
+              <option value="Front Camera">Front Camera</option>
+              <option value="Rear Camera">Rear Camera</option>
+              <option value="Portrait Camera">Portrait Camera</option>
             </select>
           </div>
           {/* <div>
