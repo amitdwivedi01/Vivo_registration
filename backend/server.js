@@ -38,47 +38,45 @@ app.use(express.json());
 
 // Route to handle storing user data along with image upload
 app.post('/api/register', upload.single('file'), async (req, res) => {
-  try {    
-    if(req.file){
-      console.log('this is hit')
+  try {
+    let imageUrl;
+    
+    if (req.file) {
       const base64String = req.file.buffer.toString('base64');
       // Upload base64 image to Cloudinary
       const result = await cloudinary.uploader.upload(`data:${req.file.mimetype};base64,${base64String}`);
-      // Create new user
-      const newUser = new User({ 
-        name: req.body.name,
-        email: req.body.email,
-        mobile: req.body.mobile,
-        city: req.body.city,
-        handset: req.body.handset,
-        tenure: req.body.tenure,
-        source: req.body.source,
-        imageUrl: result.secure_url
-      });
-        // Save user to MongoDB
-    await newUser.save();
-    }else{
-      console.log("that is hit")
-      const newUser = new User({ 
-        name: req.body.name,
-        email: req.body.email,
-        mobile: req.body.mobile,
-        city: req.body.city,
-        handset: req.body.handset,
-        tenure: req.body.tenure,
-        source: req.body.source
-      });
+      imageUrl = result.secure_url;
+    }
 
-        // Save user to MongoDB
-    await newUser.save();
-    }  
+    // Create new user
+    const newUser = new User({ 
+      name: req.body.name,
+      age: req.body.age,
+      gender: req.body.gender,
+      profession: req.body.profession,
+      email: req.body.email,
+      mobile: req.body.mobile,
+      handset: req.body.handset,
+      city: req.body.city,
+      attraction: req.body.attraction,
+      usedVivoBefore: req.body.usedVivoBefore,
+      cameraModulePreference: req.body.cameraModulePreference,
+      favoriteFeatureV30e: req.body.favoriteFeatureV30e,
+      portraitExperience: req.body.portraitExperience,
+      standoutFeature: req.body.standoutFeature,
+      imageUrl: imageUrl
+    });
 
-    res.status(201).json({ message: 'Data stored successfully'});
+    // Save user to MongoDB
+    await newUser.save();
+
+    res.status(201).json({ message: 'Data stored successfully' });
   } catch (error) {
     console.error('Error storing user data:', error);
     res.status(500).json({ error: 'Error storing user data' });
   }
 });
+
 
 // Route to fetch all user data
 app.get('/api/users', async (req, res) => {

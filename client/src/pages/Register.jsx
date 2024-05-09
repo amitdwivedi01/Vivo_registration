@@ -9,12 +9,19 @@ const citiesInIndia = ['Delhi', 'Mumbai', 'Kolkata', 'Chennai', 'Bangalore', 'Hy
 const Register = () => {
   const [formData, setFormData] = useState({
     name: '',
+    age: '',
+    gender: '',
+    profession: '',
     email: '',
     mobile: '',
-    city: '',
     handset: '',
-    tenure: '',
-    source: '',
+    city: '',
+    attraction: '',
+    usedVivoBefore: '',
+    cameraModulePreference: '',
+    favoriteFeatureV30e: '',
+    portraitExperience: '',
+    standoutFeature: '',
     file: null
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -23,27 +30,10 @@ const Register = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
-    // Check if the input is for the mobile number field
-    if (name === "mobile") {
-      // If the input length is more than 10, truncate it to 10 characters
-      if (value.length > 10) {
-        setFormData(prevState => ({
-          ...prevState,
-          [name]: value.slice(0, 10) // Only take the first 10 characters
-        }));
-      } else {
-        setFormData(prevState => ({
-          ...prevState,
-          [name]: value
-        }));
-      }
-    } else {
-      setFormData(prevState => ({
-        ...prevState,
-        [name]: value
-      }));
-    }
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
   const handleFileChange = (e) => {
@@ -61,7 +51,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.mobile.length < 10) {
+    if (formData.mobile.length !== 10) {
       alert('Please fill in a 10-digit mobile number.');
       return; // Prevent form submission
     }
@@ -69,16 +59,10 @@ const Register = () => {
     
     try {
       const NewFormData = new FormData();
-      NewFormData.append('name', formData.name);
-      NewFormData.append('email', formData.email);
-      NewFormData.append('mobile', formData.mobile);
-      NewFormData.append('city', formData.city);
-      NewFormData.append('handset', formData.handset);
-      NewFormData.append('tenure', formData.tenure);
-      NewFormData.append('source', formData.source);
-      NewFormData.append('file', formData.file);
-      
-      const response = await axios.post('http://localhost:5000/api/register', NewFormData);
+      for (const key in formData) {
+        NewFormData.append(key, formData[key]);
+      }
+      const response = await axios.post('https://beautiful-sarong-toad.cyclic.app/api/register', NewFormData);
       
       if (response.status === 201) {
         setShowModal(true);
@@ -90,12 +74,19 @@ const Register = () => {
       
       setFormData({
         name: '',
+        age: '',
+        gender: '',
+        profession: '',
         email: '',
         mobile: '',
-        city: '',
         handset: '',
-        tenure: '',
-        source: '',
+        city: '',
+        attraction: '',
+        usedVivoBefore: '',
+        cameraModulePreference: '',
+        favoriteFeatureV30e: '',
+        portraitExperience: '',
+        standoutFeature: '',
         file: null
       });
     } catch (error) {
@@ -113,41 +104,143 @@ const Register = () => {
   const handleBack = () => {
     Navigate('/');
   };
+
   return (
-    <div className='bg-blue-600 flex flex-col items-center h-screen w-full'>
+    <div className='bg-blue-600 flex flex-col items-center h-full w-full'>
       <div className="flex justify-center py-4">
         <img src={logo} className="w-[300px]" alt="" onClick={handleBack} style={{ cursor: 'pointer' }} />
       </div>
       <div className='flex justify-center items-center w-full max-w-[400px] bg-white rounded-2xl p-4 m-2 mt-8'>   
         <form className="flex flex-col gap-6 justify-center w-full" onSubmit={handleSubmit}>
           <div>
-            <TextInput type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Customer Name" required />
+            <label htmlFor="name">Name:</label>
+            <TextInput type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Enter your name" required />
           </div>
           <div>
-            <TextInput type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email ID" required />
+            <label htmlFor="age">Age:</label>
+            <select id="age" name="age" value={formData.age} onChange={handleChange} required>
+              <option value="" disabled>Select age group</option>
+              <option value="14-20 Years">14-20 Years</option>
+              <option value="21-25 Years">21-25 Years</option>
+              <option value="26-30 Years">26-30 Years</option>
+              <option value="31-35 Years">31-35 Years</option>
+              <option value="36-40 Years">36-40 Years</option>
+              <option value="40-50 Years">40-50 Years</option>
+              <option value="50 and above">50 and above</option>
+            </select>
           </div>
           <div>
-            <TextInput type="number" name="mobile" value={formData.mobile} onChange={handleChange} placeholder="Mobile NO" required />
+            <label htmlFor="gender">Gender:</label>
+            <select id="gender" name="gender" value={formData.gender} onChange={handleChange} required>
+              <option value="" disabled>Select gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
           </div>
           <div>
-            <select className="input input-bordered" name="city" value={formData.city} onChange={handleChange}>
-              <option value="" disabled hidden>City</option>
+            <label htmlFor="profession">Profession:</label>
+            <TextInput type="text" id="profession" name="profession" value={formData.profession} onChange={handleChange} placeholder="Enter your profession" required />
+          </div>
+          <div>
+            <label htmlFor="email">E-mail:</label>
+            <TextInput type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="Enter your email" required />
+          </div>
+          <div>
+            <label htmlFor="mobile">Mobile No.:</label>
+            <TextInput type="number" id="mobile" name="mobile" value={formData.mobile} onChange={handleChange} placeholder="Enter your mobile number" required />
+          </div>
+          <div>
+            <label htmlFor="handset">Current Phone:</label>
+            <select id="handset" name="handset" value={formData.handset} onChange={handleChange} required>
+              <option value="" disabled>Select your current phone</option>
+              <option value="Apple">Apple</option>
+              <option value="vivo">vivo</option>
+              <option value="IQOO">IQOO</option>
+              <option value="Samsung">Samsung</option>
+              <option value="Realme">Realme</option>
+              <option value="Honor">Honor</option>
+              <option value="Google Pixel">Google Pixel</option>
+              <option value="Oppo">Oppo</option>
+              <option value="One Plus">One Plus</option>
+              <option value="Tecno">Tecno</option>
+              <option value="Redmi">Redmi</option>
+              <option value="Moto">Moto</option>
+              <option value="Nothing">Nothing</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="city">City:</label>
+            <select id="city" name="city" value={formData.city} onChange={handleChange} required>
+              <option value="" disabled>Select your city</option>
               {citiesInIndia.map(city => (
                 <option key={city} value={city}>{city}</option>
               ))}
             </select>
           </div>
           <div>
-            <TextInput type="text" name="handset" value={formData.handset} onChange={handleChange} placeholder="Current Handset" required />
+            <label htmlFor="attraction">What attracted you to the activity?</label>
+            <select id="attraction" name="attraction" value={formData.attraction} onChange={handleChange} required>
+              <option value="" disabled>Select attraction</option>
+              <option value="Setup Design">Setup Design</option>
+              <option value="Planar Photo Op">Planar Photo Op</option>
+              <option value="Product">Product</option>
+              <option value="Emcee Engagement">Emcee Engagement</option>
+              <option value="Activities">Activities</option>
+              <option value="Gifts">Gifts</option>
+              <option value="Announcement about the V30 series">Announcement about the V30 series</option>
+              <option value="Zeiss logo">Zeiss logo</option>
+            </select>
           </div>
           <div>
-            <TextInput type="text" name="tenure" value={formData.tenure} onChange={handleChange} placeholder="Current Handset Tenure" required />
+            <label htmlFor="usedVivoBefore">Have you used vivo before?</label>
+            <select id="usedVivoBefore" name="usedVivoBefore" value={formData.usedVivoBefore} onChange={handleChange} required>
+              <option value="" disabled>Select option</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
           </div>
           <div>
-            <TextInput type="text" name="source" value={formData.source} onChange={handleChange} placeholder="Information Source Before Purchase" required />
+            <label htmlFor="cameraModulePreference">Which camera module do you like the most in V30 series?</label>
+            <select id="cameraModulePreference" name="cameraModulePreference" value={formData.cameraModulePreference} onChange={handleChange} required>
+              <option value="" disabled>Select preference</option>
+              <option value="Round Camera">Round Camera</option>
+              <option value="Square Camera">Square Camera</option>
+            </select>
           </div>
           <div>
-            <input type="file" accept="image/*" onChange={handleFileChange} />
+            <label htmlFor="favoriteFeatureV30e">Which feature of V30e do you like the most?</label>
+            <select id="favoriteFeatureV30e" name="favoriteFeatureV30e" value={formData.favoriteFeatureV30e} onChange={handleChange} required>
+              <option value="" disabled>Select favorite feature</option>
+              <option value="Gem Cut Camera Module">Gem Cut Camera Module</option>
+              <option value="5500 mAh Battery">5500 mAh Battery</option>
+              <option value="Textured Ribbon">Textured Ribbon</option>
+              <option value="Studio-Quality Aura Light">Studio-Quality Aura Light</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="portraitExperience">As compared to your current handset, did you get a better portrait experience?</label>
+            <select id="portraitExperience" name="portraitExperience" value={formData.portraitExperience} onChange={handleChange} required>
+              <option value="" disabled>Select experience</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+              <option value="Not Sure">Not Sure</option>
+              <option value="Similar Only">Similar Only</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="standoutFeature">What feature of the product stood out to you the most?</label>
+            <select id="standoutFeature" name="standoutFeature" value={formData.standoutFeature} onChange={handleChange} required>
+              <option value="" disabled>Select standout feature</option>
+              <option value="Ultra Slim 3D Curved Display">Ultra Slim 3D Curved Display</option>
+              <option value="Colour">Colour</option>
+              <option value="50MP (Sony IMX882) Camera">50MP (Sony IMX882) Camera</option>
+              <option value="Processor">Processor</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="file">Upload Image:</label>
+            <input type="file" id="file" accept="image/*" onChange={handleFileChange} />
           </div>
           {
             isLoading ?

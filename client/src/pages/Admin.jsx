@@ -64,7 +64,7 @@ const Admin = () => {
           <table className="min-w-full divide-y divide-gray-200">
             <tbody className="bg-white divide-y divide-gray-200">
               {filteredUserData.map((user) => (
-                <tr key={user.id}>
+                <tr key={user._id}>
                   <td className="px-2 py-4 whitespace-nowrap">
                     <img
                       src={user.imageUrl}
@@ -72,7 +72,7 @@ const Admin = () => {
                       className="w-[100px] rounded-md"
                     />
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user._id}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.mobile}</td>
@@ -80,6 +80,15 @@ const Admin = () => {
                   <td className="px-6 py-4 whitespace-nowrap">{user.handset}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.tenure}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.source}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.age}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.gender}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.profession}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.attraction}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.usedVivoBefore}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.cameraModulePreference}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.favoriteFeatureV30e}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.portraitExperience}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.standoutFeature}</td>
                 </tr>
               ))}
             </tbody>
