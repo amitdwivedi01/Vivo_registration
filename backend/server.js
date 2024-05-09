@@ -81,7 +81,7 @@ app.post('/api/register', upload.single('file'), async (req, res) => {
 // Route to fetch all user data
 app.get('/api/users', async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find().sort({ _id: -1 });
     res.json(users);
   } catch (error) {
     console.error('Error fetching user data:', error);
