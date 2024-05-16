@@ -50,6 +50,10 @@ const userSchema = new mongoose.Schema({
   },
   imageUrl: {
     type: String,
+  },
+  timestamp: { 
+    type: Date, 
+    default: Date.now
   }
 });
 
