@@ -22,7 +22,7 @@ const Admin = () => {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const response = await axios.get("https://beautiful-sarong-toad.cyclic.app/api/users");
+        const response = await axios.get("https://vivo-registration.vercel.app/api/users");
         if (response.status === 200) {
           const users = response.data;
           setUserData(users);
@@ -112,7 +112,7 @@ const Admin = () => {
                 <td className="px-6 py-4 whitespace-nowrap">{user.favoriteFeatureV30e}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{user.portraitExperience}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{user.standoutFeature}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.timestamp.split('T')[0]}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{user.timestamp}</td>
               </tr>
               ))}
             </tbody>

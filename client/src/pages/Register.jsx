@@ -160,6 +160,10 @@ const Register = () => {
       alert("Please fill in a 10-digit mobile number.");
       return; // Prevent form submission
     }
+    if(!citiesInIndia.includes(formData.city)){
+      alert("please select the correct city");
+      return;
+    }
     setIsLoading(true);
 
     try {
@@ -318,20 +322,17 @@ const Register = () => {
                 type="text"
                 id="city"
                 name="city"
-                value={formData.city}
+                list="data"
                 onChange={handleChange}
-                placeholder="Search or select your city"
+                placeholder="select your city"
                 className="form-input border-gray-300 rounded-md"
               />
-              <select
+              <datalist id="data"
                 className="mt-1 mr-1 form-select"
                 value={formData.city}
                 onChange={handleChange}
                 required
               >
-                <option value="" disabled>
-                  Select your city
-                </option>
                 {citiesInIndia
                   .filter((city) =>
                     city.toLowerCase().includes(formData.city.toLowerCase())
@@ -341,7 +342,7 @@ const Register = () => {
                       {city}
                     </option>
                   ))}
-              </select>
+              </datalist>
             </div>
           </div>
           <div className="flex flex-col gap-1">
