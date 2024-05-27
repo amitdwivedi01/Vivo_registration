@@ -22,7 +22,7 @@ const Admin = () => {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const response = await axios.get("https://vivo-registration.vercel.app/api/users");
+        const response = await axios.get("https://vivo-registration-eugssn7j7-amitdwivedi01s-projects.vercel.app/api/users");
         if (response.status === 200) {
           const users = response.data;
           setUserData(users);
