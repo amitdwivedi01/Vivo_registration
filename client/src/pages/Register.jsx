@@ -104,28 +104,27 @@ const Register = () => {
     mobile: "",
     handset: "",
     city: "",
-    attraction: "",
     usedVivoBefore: "",
-    cameraModulePreference: "",
-    favoriteFeatureV30e: "",
-    portraitExperience: "",
-    standoutFeature: "",
+    favoriteFeature: "",
     attractFeature: "",
-    file: null,
+    trustSource: "",
+    awareOfLaunch: "",
+    launchSource: "",
+    considerBuying: "",
+    paymentMode: "",
+    rating: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const Navigate = useNavigate();
 
-  // Check if the input is for the mobile number field
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "mobile") {
-      // If the input length is more than 10, truncate it to 10 characters
       if (value.length > 10) {
         setFormData((prevState) => ({
           ...prevState,
-          [name]: value.slice(0, 10), // Only take the first 10 characters
+          [name]: value.slice(0, 10),
         }));
       } else {
         setFormData((prevState) => ({
@@ -141,27 +140,14 @@ const Register = () => {
     }
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file && file.size > 5 * 1024 * 1024) {
-      alert("Image size should be less than 5MB.");
-      e.target.value = null; // Clear input field
-    } else {
-      setFormData((prevState) => ({
-        ...prevState,
-        file,
-      }));
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.mobile.length !== 10) {
       alert("Please fill in a 10-digit mobile number.");
-      return; // Prevent form submission
+      return;
     }
-    if(!citiesInIndia.includes(formData.city)){
-      alert("please select the correct city");
+    if (!citiesInIndia.includes(formData.city)) {
+      alert("Please select the correct city.");
       return;
     }
     setIsLoading(true);
@@ -172,7 +158,8 @@ const Register = () => {
         NewFormData.append(key, formData[key]);
       }
       const response = await axios.post(
-        "https://beautiful-sarong-toad.cyclic.app/api/register",
+        "https://vivoregistration-production.up.railway.app/api/register",
+        // "http://localhost:5000/api/register",
         NewFormData
       );
 
@@ -193,14 +180,15 @@ const Register = () => {
         mobile: "",
         handset: "",
         city: "",
-        attraction: "",
         usedVivoBefore: "",
-        cameraModulePreference: "",
-        favoriteFeatureV30e: "",
-        portraitExperience: "",
-        standoutFeature: "",
+        favoriteFeature: "",
         attractFeature: "",
-        file: null,
+        trustSource: "",
+        awareOfLaunch: "",
+        launchSource: "",
+        considerBuying: "",
+        paymentMode: "",
+        rating: "",
       });
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -281,16 +269,23 @@ const Register = () => {
               <option value="Female">Female</option>
             </select>
           </div>
-          <div>
+          <div className="flex flex-col gap-1">
             <label htmlFor="profession">Profession:</label>
-            <TextInput
-              type="text"
+            <select
               id="profession"
               name="profession"
               value={formData.profession}
               onChange={handleChange}
-              placeholder="Enter your profession"
-            />
+            >
+              <option value="" disabled>
+                Select Profession
+              </option>
+              <option value="Business">Business</option>
+              <option value="Self-Employed">Self-Employed</option>
+              <option value="Salaried">Salaried</option>
+              <option value="Student">Student</option>
+              <option value="Others">Others</option>
+            </select>
           </div>
           <div>
             <label htmlFor="email">E-mail:</label>
@@ -317,33 +312,23 @@ const Register = () => {
           </div>
           <div className="flex flex-col gap-1">
             <label htmlFor="city">City:</label>
-            <div className="">
-              <input
-                type="text"
-                id="city"
-                name="city"
-                list="data"
-                onChange={handleChange}
-                placeholder="select your city"
-                className="form-input border-gray-300 rounded-md"
-              />
-              <datalist id="data"
-                className="mt-1 mr-1 form-select"
-                value={formData.city}
-                onChange={handleChange}
-                required
-              >
-                {citiesInIndia
-                  .filter((city) =>
-                    city.toLowerCase().includes(formData.city.toLowerCase())
-                  )
-                  .map((city) => (
-                    <option key={city} value={city}>
-                      {city}
-                    </option>
-                  ))}
-              </datalist>
-            </div>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              list="cities"
+              onChange={handleChange}
+              value={formData.city}
+              placeholder="Select your city"
+              className="form-input border-gray-300 rounded-md"
+            />
+            <datalist id="cities">
+              {citiesInIndia.map((city) => (
+                <option key={city} value={city}>
+                  {city}
+                </option>
+              ))}
+            </datalist>
           </div>
           <div className="flex flex-col gap-1">
             <label htmlFor="handset">Current Phone:</label>
@@ -373,9 +358,28 @@ const Register = () => {
             </select>
           </div>
           <div className="flex flex-col gap-1">
+            <label htmlFor="favoriteFeature">
+              Which feature of the product impressed you the most?
+            </label>
+            <select
+              id="favoriteFeature"
+              name="favoriteFeature"
+              value={formData.favoriteFeature}
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                Select Attracted Features
+              </option>
+              <option value="Design, Sleekness">Design, Sleekness</option>
+              <option value="Hover mode">Hover mode</option>
+              <option value="Rear Camera Selfie">Rear Camera Selfie</option>
+              <option value="AI Features">AI Features</option>
+              <option value="ZEISS Collaboration">ZEISS Collaboration</option>
+            </select>
+          </div>
+          <div className="flex flex-col gap-1">
             <label htmlFor="attractFeature">
-              Which feature of the phone attracts you while making purchase
-              decision?
+              What Attracted you to the Setup
             </label>
             <select
               id="attractFeature"
@@ -384,42 +388,14 @@ const Register = () => {
               onChange={handleChange}
             >
               <option value="" disabled>
-                Select your current phone
-              </option>
-              <option value="Design">Design</option>
-              <option value="Brand">Brand</option>
-              <option value="Camera">Camera</option>
-              <option value="Processor">Processor</option>
-              <option value="Security">Security</option>
-              <option value="Battery">Battery</option>
-              <option value="Colour">Colour</option>
-              <option value="Water-resistant">Water-resistant</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <label htmlFor="attraction">
-              What attracted you to the activity?
-            </label>
-            <select
-              id="attraction"
-              name="attraction"
-              value={formData.attraction}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
                 Select attraction
               </option>
               <option value="Setup Design">Setup Design</option>
-              <option value="Planar Photo Op">Planar Photo Op</option>
-              <option value="Product">Product</option>
-              <option value="Emcee Engagement">Emcee Engagement</option>
-              <option value="Activities">Activities</option>
-              <option value="Gifts">Gifts</option>
-              <option value="Announcement about the V30 series">
-                Announcement about the V30 series
+              <option value="Product Logo/ vivo Branding">
+                Product Logo/ vivo Branding
               </option>
-              <option value="Zeiss logo">Zeiss logo</option>
+              <option value="Violinist">Violinist</option>
+              <option value="Announcement">Announcement </option>
             </select>
           </div>
           <div className="flex flex-col gap-1">
@@ -438,87 +414,129 @@ const Register = () => {
             </select>
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="cameraModulePreference">
-              Which camera module do you like the most in V30 series?
+            <label htmlFor="awareOfLaunch">
+              Were you aware that vivo was launching the fold, before visiting
+              the setup?
             </label>
             <select
-              id="cameraModulePreference"
-              name="cameraModulePreference"
-              value={formData.cameraModulePreference}
+              id="awareOfLaunch"
+              name="awareOfLaunch"
+              value={formData.awareOfLaunch}
               onChange={handleChange}
             >
               <option value="" disabled>
-                Select preference
+                Select option
               </option>
-              <option value="Round Camera">Round Camera</option>
-              <option value="Square Camera">Square Camera</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          {formData.awareOfLaunch === "Yes" && (
+            <div className="flex flex-col gap-1">
+              <label htmlFor="launchSource">
+                If yes, where did you find out about the launch?
+              </label>
+              <select
+                id="launchSource"
+                name="launchSource"
+                value={formData.launchSource}
+                onChange={handleChange}
+              >
+                <option value="" disabled>
+                  Select source
+                </option>
+                <option value="Online">Online</option>
+                <option value="Retail stores - Branding, Poster etc">
+                  Retail stores - Branding, Poster etc
+                </option>
+                <option value="Word of Mouth">Word of Mouth</option>
+                <option value="Hoardings">Hoardings</option>
+                <option value="Not Applicable">Not Applicable</option>
+              </select>
+            </div>
+          )}
+          <div className="flex flex-col gap-1">
+            <label htmlFor="trustSource">
+              If you wish to buy the product, whom will you trust more
+            </label>
+            <select
+              id="trustSource"
+              name="trustSource"
+              value={formData.trustSource}
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                Select source
+              </option>
+              <option value="Exclusive vivo store">Exclusive vivo store</option>
+              <option value="Online">Online</option>
+              <option value="General store near your locality">
+                General store near your locality
+              </option>
+              <option value="Croma/Reliance/Vijay Sales ets">
+                Croma/Reliance/Vijay Sales ets
+              </option>
             </select>
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="favoriteFeatureV30e">
-              Which feature of V30e do you like the most?
+            <label htmlFor="considerBuying">
+              Would you consider buying the X Fold3 Pro?
             </label>
             <select
-              id="favoriteFeatureV30e"
-              name="favoriteFeatureV30e"
-              value={formData.favoriteFeatureV30e}
+              id="considerBuying"
+              name="considerBuying"
+              value={formData.considerBuying}
               onChange={handleChange}
             >
               <option value="" disabled>
-                Select favorite feature
-              </option>
-              <option value="Gem Cut Camera Module">
-                Gem Cut Camera Module
-              </option>
-              <option value="5500 mAh Battery">5500 mAh Battery</option>
-              <option value="Textured Ribbon">Textured Ribbon</option>
-              <option value="Studio-Quality Aura Light">
-                Studio-Quality Aura Light
-              </option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="portraitExperience">
-              As compared to your current handset, did you get a better portrait
-              experience?
-            </label>
-            <select
-              id="portraitExperience"
-              name="portraitExperience"
-              value={formData.portraitExperience}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Select experience
+                Select option
               </option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
               <option value="Not Sure">Not Sure</option>
-              <option value="Similar Only">Similar Only</option>
+              <option value="Maybe later">Maybe later</option>
             </select>
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="standoutFeature">
-              Which camera did you like the most for photography?
+            <label htmlFor="paymentMode">
+              While purchasing a product like fold, what would be your preferred
+              mode of payment?
             </label>
             <select
-              id="standoutFeature"
-              name="standoutFeature"
-              value={formData.standoutFeature}
+              id="paymentMode"
+              name="paymentMode"
+              value={formData.paymentMode}
               onChange={handleChange}
             >
               <option value="" disabled>
-                Select camera you like for photography
+                Select payment mode
               </option>
-              <option value="Front Camera">Front Camera</option>
-              <option value="Rear Camera">Rear Camera</option>
-              <option value="Portrait Camera">Portrait Camera</option>
+              <option value="Cash">Cash</option>
+              <option value="EMI">EMI</option>
+              <option value="Credit Cards">Credit Cards</option>
             </select>
           </div>
-          {/* <div>
-            <label htmlFor="file">Upload Image:</label>
-            <input type="file" id="file" accept="image/*" onChange={handleFileChange} />
-          </div> */}
+          <div className="flex flex-col gap-1">
+            <label htmlFor="rating">
+              On a scale of 1 to 5, how would you rate our product (choose) - 5
+              being best:
+            </label>
+            <select
+              id="rating"
+              name="rating"
+              value={formData.rating}
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                Select rating
+              </option>
+              <option value="1 star">1 star</option>
+              <option value="2 star">2 star</option>
+              <option value="3 star">3 star</option>
+              <option value="4 star">4 star</option>
+              <option value="5 star">5 star</option>
+            </select>
+          </div>
           {isLoading ? (
             <Button className="bg-blue-600 hover:bg-blue-800" disabled>
               {" "}

@@ -49,7 +49,7 @@ app.post('/api/register', upload.single('file'), async (req, res) => {
     }
 
     // Create new user
-    const newUser = new User({ 
+    const newUser = new User({
       name: req.body.name,
       age: req.body.age,
       gender: req.body.gender,
@@ -58,16 +58,17 @@ app.post('/api/register', upload.single('file'), async (req, res) => {
       mobile: req.body.mobile,
       handset: req.body.handset,
       city: req.body.city,
-      attraction: req.body.attraction,
+      favoriteFeature: req.body.favoriteFeature,
+      attractFeature: req.body.attractFeature,
       usedVivoBefore: req.body.usedVivoBefore,
-      cameraModulePreference: req.body.cameraModulePreference,
-      favoriteFeatureV30e: req.body.favoriteFeatureV30e,
-      portraitExperience: req.body.portraitExperience,
-      standoutFeature: req.body.standoutFeature,
-      attractFeature:req.body.attractFeature,
+      awareOfLaunch: req.body.awareOfLaunch,
+      launchSource: req.body.launchSource,
+      trustSource: req.body.trustSource,
+      considerBuying: req.body.considerBuying,
+      paymentMode: req.body.paymentMode,
+      rating: req.body.rating,
       imageUrl: imageUrl
     });
-
     // Save user to MongoDB
     await newUser.save();
 
@@ -89,6 +90,7 @@ app.get('/api/users', async (req, res) => {
     res.status(500).json({ error: 'Error fetching user data' });
   }
 });
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "flowbite-react";
-import { Spinner } from "flowbite-react";
+import { Button, Spinner } from "flowbite-react";
 import axios from "axios";
 import * as XLSX from "xlsx";
 
@@ -10,6 +9,7 @@ const Admin = () => {
   const [userData, setUserData] = useState([]);
   const [uniqueCities, setUniqueCities] = useState([]);
   const [uniqueDates, setUniqueDates] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const handleExportToExcel = () => {
     const filename = "userData.xlsx";
@@ -22,9 +22,14 @@ const Admin = () => {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const response = await axios.get("https://vivo-registration-eugssn7j7-amitdwivedi01s-projects.vercel.app/api/users");
+        const response = await axios.get("https://vivoregistration-production.up.railway.app/api/users");
+        // const response = await axios.get("http://localhost:5000/api/users");
+
         if (response.status === 200) {
-          const users = response.data;
+          const users = response.data.map((user, index) => ({
+            ...user,
+            index, // Preserve original index
+          }));
           setUserData(users);
           const cities = [...new Set(users.map(user => user.city))];
           setUniqueCities(cities);
@@ -35,6 +40,8 @@ const Admin = () => {
         }
       } catch (error) {
         alert("Error: " + error.message);
+      } finally {
+        setLoading(false);
       }
     };
     getUserData();
@@ -51,11 +58,13 @@ const Admin = () => {
     } else {
       return user.city === cityFilter; // Only city filter applied
     }
-  });
+  }).sort((a, b) => a.index - b.index); // Maintain original order
 
   return (
     <>
-      {userData.length > 0 ? (
+      {loading ? (
+        <Spinner />
+      ) : (
         <div className="container mx-auto mt-8">
           <div className="flex justify-between mb-4">
             <h2 className="text-3xl font-semibold">User Data</h2>
@@ -80,46 +89,67 @@ const Admin = () => {
                   <option key={index} value={date}>{date}</option>
                 ))}
               </select>
-              <h2 className="mr-4 text-md">count: {filteredUserData.length}</h2>
+              <h2 className="mr-4 text-md">Count: {filteredUserData.length}</h2>
               <Button onClick={handleExportToExcel}>Export to Excel</Button>
             </div>
           </div>
           <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mobile</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">City</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Handset</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Attract Feature</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tenure</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Source</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gender</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Profession</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Attraction</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Used Vivo Before</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Camera Module Preference</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Favorite Feature V30e</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Portrait Experience</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Standout Feature</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Timestamp</th>
+              </tr>
+            </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {filteredUserData.map((user) => (
                 <tr key={user._id}>
-                <td className="px-2 py-4 whitespace-nowrap">
-                  <img
-                    src={user.imageUrl}
-                    alt={user.name}
-                    className="w-[100px] rounded-md"
-                  />
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.mobile}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.city}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.handset}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.attractFeature}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.tenure}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.source}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.age}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.gender}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.profession}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.attraction}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.usedVivoBefore}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.cameraModulePreference}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.favoriteFeatureV30e}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.portraitExperience}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.standoutFeature}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.timestamp}</td>
-              </tr>
+                  <td className="px-2 py-4 whitespace-nowrap">
+                    <img
+                      src={user.imageUrl}
+                      alt={user.name}
+                      className="w-[100px] rounded-md"
+                    />
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.name}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.mobile}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.city}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.handset}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.attractFeature}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.tenure}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.source}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.age}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.gender}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.profession}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.attraction}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.usedVivoBefore}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.cameraModulePreference}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.favoriteFeatureV30e}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.portraitExperience}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.standoutFeature}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{new Date(user.timestamp).toLocaleDateString()}</td>
+                </tr>
               ))}
             </tbody>
           </table>
         </div>
-      ) : (
-        <Spinner />
       )}
     </>
   );
