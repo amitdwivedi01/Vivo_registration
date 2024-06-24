@@ -2,96 +2,15 @@ import React, { useState } from "react";
 import { Button, TextInput, Modal, Spinner } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import logo from "../assets/vivo_logo.png";
+import logo from "../assets/vivo_new_logo.png";
 
 const citiesInIndia = [
-  "Agra",
-  "Ahmeddabad",
-  "Ajmer",
-  "Amritsar",
-  "Amravati",
-  "Aurangabad",
-  "Baroda",
-  "Bangalore",
-  "Bhopal",
-  "Bhubaneswar",
-  "Chandigarh",
-  "Chennai",
-  "Coimbatore",
-  "Cuttack",
-  "Dehradun",
   "Delhi",
-  "Dhanbad",
-  "Faridabad",
-  "Ghaziabad",
-  "Goa",
-  "Gorakhpur",
-  "Gurugram",
-  "Guwahati",
-  "Hyderbad",
-  "Indore",
-  "Jaipur",
-  "Jalandar",
-  "Jammu",
-  "Jamshedpur",
-  "Jodhpur",
-  "Kanpur",
-  "kochi",
-  "Kolkata",
-  "Kota",
-  "Kozhikode",
-  "Lucknow",
-  "Ludhiana",
-  "Madhurai",
-  "Manglore",
-  "Meerut",
-  "Mohali",
-  "Mumbai",
-  "Mysore",
-  "Nagpur",
-  "Navi Mumbai",
-  "Noida",
-  "Patna",
-  "Pune",
-  "Raipur",
-  "Rajkot",
-  "Ranchi",
-  "Sant kabir Nagar",
-  "Sant Ravidas Nagar",
-  "Satara",
-  "Satna",
-  "Shajapur",
-  "Shamli",
-  "Shimla",
-  "Shivpuri",
-  "Siddhartnagar",
-  "Singrauli",
-  "Sirmaur",
-  "Sitapur",
-  "Solan",
-  "Solapur",
-  "Sonbhadra",
-  "Sonipat",
-  "Srinagar",
-  "Sultanpur",
-  "Surat",
-  "Thane",
-  "Thiruvananthapura",
-  "Tiruchirappalli",
-  "Tirupur",
-  "udaipur",
-  "Udhampur",
-  "Udupi",
-  "Ujjain",
-  "Unnao",
-  "Vadodara",
-  "Vaishali",
-  "Varanasi",
-  "Vellore",
-  "Vidisha",
-  "Vijaywada",
-  "Visakhapatnam",
-  "Yamuna Nagar",
+  "Haryana",
+  "Delhi - Airport",
+  "Mumbai - Airport",
+  "Bangalore - Airport",
+  "Hyderabad - Airport"
 ];
 
 const Register = () => {
@@ -211,7 +130,7 @@ const Register = () => {
       <div className="flex justify-center py-4">
         <img
           src={logo}
-          className="w-[300px]"
+          className="w-[450px]"
           alt=""
           onClick={handleBack}
           style={{ cursor: "pointer" }}
@@ -312,7 +231,21 @@ const Register = () => {
           </div>
           <div className="flex flex-col gap-1">
             <label htmlFor="city">City:</label>
-            <input
+            <select
+              id="city"
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                Select your City
+              </option>
+              {citiesInIndia.map((city) => (
+                <option key={city} value={city}>
+                  {city}
+                </option>
+              ))}
+            {/* <input
               type="text"
               id="city"
               name="city"
@@ -328,7 +261,8 @@ const Register = () => {
                   {city}
                 </option>
               ))}
-            </datalist>
+            </datalist> */}
+            </select>
           </div>
           <div className="flex flex-col gap-1">
             <label htmlFor="handset">Current Phone:</label>
@@ -378,45 +312,8 @@ const Register = () => {
             </select>
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="attractFeature">
-              What Attracted you to the Setup
-            </label>
-            <select
-              id="attractFeature"
-              name="attractFeature"
-              value={formData.attractFeature}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Select attraction
-              </option>
-              <option value="Setup Design">Setup Design</option>
-              <option value="Product Logo/ vivo Branding">
-                Product Logo/ vivo Branding
-              </option>
-              <option value="Violinist">Violinist</option>
-              <option value="Announcement">Announcement </option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="usedVivoBefore">Have you used vivo before?</label>
-            <select
-              id="usedVivoBefore"
-              name="usedVivoBefore"
-              value={formData.usedVivoBefore}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Select option
-              </option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-1">
             <label htmlFor="awareOfLaunch">
-              Were you aware that vivo was launching the fold, before visiting
-              the setup?
+              Were you aware that vivo was launching the fold ?
             </label>
             <select
               id="awareOfLaunch"
@@ -456,29 +353,6 @@ const Register = () => {
             </div>
           )}
           <div className="flex flex-col gap-1">
-            <label htmlFor="trustSource">
-              If you wish to buy the product, whom will you trust more
-            </label>
-            <select
-              id="trustSource"
-              name="trustSource"
-              value={formData.trustSource}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Select source
-              </option>
-              <option value="Exclusive vivo store">Exclusive vivo store</option>
-              <option value="Online">Online</option>
-              <option value="General store near your locality">
-                General store near your locality
-              </option>
-              <option value="Croma/Reliance/Vijay Sales ets">
-                Croma/Reliance/Vijay Sales ets
-              </option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-1">
             <label htmlFor="considerBuying">
               Would you consider buying the X Fold3 Pro?
             </label>
@@ -511,11 +385,69 @@ const Register = () => {
               <option value="" disabled>
                 Select payment mode
               </option>
-              <option value="Cash">Cash</option>
+              <option value="Finance">Finance</option>
               <option value="EMI">EMI</option>
-              <option value="Credit Cards">Credit Cards</option>
+              <option value="Cash/Full swipe Credit Cards">Cash/Full swipe Credit Cards</option>
             </select>
           </div>
+          {/* <div className="flex flex-col gap-1">
+            <label htmlFor="attractFeature">
+              What Attracted you to the Setup
+            </label>
+            <select
+              id="attractFeature"
+              name="attractFeature"
+              value={formData.attractFeature}
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                Select attraction
+              </option>
+              <option value="Setup Design">Setup Design</option>
+              <option value="Product Logo/ vivo Branding">
+                Product Logo/ vivo Branding
+              </option>
+              <option value="Violinist">Violinist</option>
+              <option value="Announcement">Announcement </option>
+            </select>
+          </div> */}
+          <div className="flex flex-col gap-1">
+            <label htmlFor="usedVivoBefore">Have you used vivo before?</label>
+            <select
+              id="usedVivoBefore"
+              name="usedVivoBefore"
+              value={formData.usedVivoBefore}
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                Select option
+              </option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          
+          <div className="flex flex-col gap-1">
+            <label htmlFor="trustSource">
+            If you don’t use vivo anymore, what would bring you back to the brand?
+            </label>
+            <select
+              id="trustSource"
+              name="trustSource"
+              value={formData.trustSource}
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                Select source
+              </option>
+              <option value="Better product innovation">Better product innovation</option>
+              <option value="Better brand perception">Better brand perception</option>
+              <option value="More offers">More offers</option>
+              <option value="Special loyalty rewards">Special loyalty rewards</option>
+            </select>
+          </div>
+          
+          
           <div className="flex flex-col gap-1">
             <label htmlFor="rating">
               On a scale of 1 to 5, how would you rate our product (choose) - 5
@@ -530,11 +462,11 @@ const Register = () => {
               <option value="" disabled>
                 Select rating
               </option>
-              <option value="1 star">1 star</option>
-              <option value="2 star">2 star</option>
-              <option value="3 star">3 star</option>
-              <option value="4 star">4 star</option>
               <option value="5 star">5 star</option>
+              <option value="4 star">4 star</option>
+              <option value="3 star">3 star</option>
+              <option value="2 star">2 star</option>
+              <option value="1 star">1 star</option>
             </select>
           </div>
           {isLoading ? (

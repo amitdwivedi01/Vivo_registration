@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/vivo_logo.png';
+import logo from '../assets/vivo_new_logo.png';
 import { Link } from 'react-router-dom';
 
 const Start = () => {
@@ -7,7 +7,7 @@ const Start = () => {
     <div className="w-full h-screen flex flex-col bg-blue-600">
       {/* Logo at the top */}
       <div className="flex justify-center py-8 mt-[100px]">
-        <img src={logo} className="w-[300px]" alt="" />
+        <img src={logo} className="w-[450px]" alt="" />
       </div>
 
       {/* Register button centered */}

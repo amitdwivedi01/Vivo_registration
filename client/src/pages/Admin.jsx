@@ -101,19 +101,21 @@ const Admin = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mobile</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">City</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Handset</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Attract Feature</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tenure</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Source</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gender</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Profession</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Attraction</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Handset</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Attract Feature</th>
+                {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Favorite Feature</th> */}
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aware Of Launch</th>                
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Launch Source</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Consider Buying</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Payment Mode</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Used Vivo Before</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Camera Module Preference</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Favorite Feature V30e</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Portrait Experience</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Standout Feature</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bring You Back</th>
+                
+                
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rating</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Timestamp</th>
               </tr>
             </thead>
@@ -131,19 +133,20 @@ const Admin = () => {
                   <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.mobile}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.city}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.handset}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.attractFeature}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.tenure}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.source}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.age}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.gender}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.profession}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.attraction}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.handset}</td>
+                  {/* <td className="px-6 py-4 whitespace-nowrap">{user.attractFeature}</td> */}
+                  <td className="px-6 py-4 whitespace-nowrap">{user.favoriteFeature}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.awareOfLaunch}</td>                 
+                  <td className="px-6 py-4 whitespace-nowrap">{user.launchSource}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.considerBuying}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.paymentMode}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.usedVivoBefore}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.cameraModulePreference}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.favoriteFeatureV30e}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.portraitExperience}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.standoutFeature}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.trustSource}</td>                  
+                  
+                  <td className="px-6 py-4 whitespace-nowrap">{user.rating}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{new Date(user.timestamp).toLocaleDateString()}</td>
                 </tr>
               ))}
