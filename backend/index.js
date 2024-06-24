@@ -66,8 +66,7 @@ app.post('/api/register', upload.single('file'), async (req, res) => {
       trustSource: req.body.trustSource,
       considerBuying: req.body.considerBuying,
       paymentMode: req.body.paymentMode,
-      rating: req.body.rating,
-      imageUrl: imageUrl
+      rating: req.body.rating
     });
     // Save user to MongoDB
     await newUser.save();
