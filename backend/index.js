@@ -37,7 +37,10 @@ app.use(cors());
 app.use(express.json());
 
 // Route to handle storing user data along with image upload
-        
+app.use('/', (req, res) => {
+  res.send('Vivo Server Running');
+});
+
 app.post('/api/register', upload.single('file'), async (req, res) => {
   try {
     let imageUrl;
