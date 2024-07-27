@@ -77,7 +77,7 @@ const Register = () => {
         NewFormData.append(key, formData[key]);
       }
       const response = await axios.post(
-        "https://vivoregistration-production.up.railway.app/api/register",
+        "https://vivo-registration.onrender.com/api/register",
         // "http://localhost:5000/api/register",
         NewFormData
       );
