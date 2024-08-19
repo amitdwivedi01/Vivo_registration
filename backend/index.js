@@ -37,6 +37,10 @@ app.use(cors());
 app.use(express.json());
 
 // Route to handle storing user data along with image upload
+app.get('/', (req, res) => {
+  res.send('Vivo Server Running');
+});
+
 app.post('/api/register', upload.single('file'), async (req, res) => {
   try {
     let imageUrl;
@@ -93,6 +97,6 @@ app.get('/api/users', async (req, res) => {
 });
 
 
-app.listen(PORT, () => {
+app.listen(PORT,"0.0.0.0", () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

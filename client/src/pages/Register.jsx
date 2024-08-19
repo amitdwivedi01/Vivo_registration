@@ -66,6 +66,10 @@ const Register = () => {
       }
       const response = await axios.post(
         "https://vivo-registration.onrender.com/api/register",
+<<<<<<< HEAD
+=======
+        // "http://localhost:5000/api/register",
+>>>>>>> 298d430f8ad679ce22d83d25c3bd513a1985bc73
         NewFormData
       );
 

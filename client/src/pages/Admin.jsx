@@ -23,6 +23,10 @@ const Admin = () => {
     const getUserData = async () => {
       try {
         const response = await axios.get("https://vivo-registration.onrender.com/api/users");
+<<<<<<< HEAD
+=======
+        // const response = await axios.get("http://localhost:5000/api/users");
+>>>>>>> 298d430f8ad679ce22d83d25c3bd513a1985bc73
 
         if (response.status === 200) {
           const users = response.data.map((user, index) => ({
