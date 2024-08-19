@@ -57,17 +57,18 @@ app.post('/api/register', upload.single('file'), async (req, res) => {
       email: req.body.email,
       mobile: req.body.mobile,
       handset: req.body.handset,
-      city: req.body.city,
-      favoriteFeature: req.body.favoriteFeature,
-      attractFeature: req.body.attractFeature,
-      usedVivoBefore: req.body.usedVivoBefore,
-      awareOfLaunch: req.body.awareOfLaunch,
-      launchSource: req.body.launchSource,
-      trustSource: req.body.trustSource,
-      considerBuying: req.body.considerBuying,
-      paymentMode: req.body.paymentMode,
-      rating: req.body.rating
+      experienceRating: req.body.experienceRating,
+      zeissFactor: req.body.zeissFactor,
+      vivoDemoHelped: req.body.vivoDemoHelped,
+      photoUploadFrequency: req.body.photoUploadFrequency,
+      favoritePhotoType: req.body.favoritePhotoType,
+      socialMediaTime: req.body.socialMediaTime,
+      purchasePreference: req.body.purchasePreference,
+      influencerImpact: req.body.influencerImpact,
+      favoriteV40Feature: req.body.favoriteV40Feature,
+      setupAttraction: req.body.setupAttraction,
     });
+
     // Save user to MongoDB
     await newUser.save();
 
@@ -77,6 +78,7 @@ app.post('/api/register', upload.single('file'), async (req, res) => {
     res.status(500).json({ error: 'Error storing user data' });
   }
 });
+
 
 
 // Route to fetch all user data

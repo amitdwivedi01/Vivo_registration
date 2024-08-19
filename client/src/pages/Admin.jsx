@@ -22,8 +22,7 @@ const Admin = () => {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const response = await axios.get("https://vivoregistration-production.up.railway.app/api/users");
-        // const response = await axios.get("http://localhost:5000/api/users");
+        const response = await axios.get("https://vivo-registration.onrender.com/api/users");
 
         if (response.status === 200) {
           const users = response.data.map((user, index) => ({
@@ -105,17 +104,16 @@ const Admin = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gender</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Profession</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Handset</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Attract Feature</th>
-                {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Favorite Feature</th> */}
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aware Of Launch</th>                
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Launch Source</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Consider Buying</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Payment Mode</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Used Vivo Before</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bring You Back</th>
-                
-                
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rating</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Experience Rating</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ZEISS Factor</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vivo Demo Helped</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Photo Upload Frequency</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Favorite Photo Type</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Social Media Time</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Purchase Preference</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Influencer Impact</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Favorite V40 Feature</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Setup Attraction</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Timestamp</th>
               </tr>
             </thead>
@@ -137,16 +135,16 @@ const Admin = () => {
                   <td className="px-6 py-4 whitespace-nowrap">{user.gender}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.profession}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.handset}</td>
-                  {/* <td className="px-6 py-4 whitespace-nowrap">{user.attractFeature}</td> */}
-                  <td className="px-6 py-4 whitespace-nowrap">{user.favoriteFeature}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.awareOfLaunch}</td>                 
-                  <td className="px-6 py-4 whitespace-nowrap">{user.launchSource}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.considerBuying}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.paymentMode}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.usedVivoBefore}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.trustSource}</td>                  
-                  
-                  <td className="px-6 py-4 whitespace-nowrap">{user.rating}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.experienceRating}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.zeissFactor}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.vivoDemoHelped}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.photoUploadFrequency}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.favoritePhotoType}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.socialMediaTime}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.purchasePreference}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.influencerImpact}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.favoriteV40Feature}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.setupAttraction}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{new Date(user.timestamp).toLocaleDateString()}</td>
                 </tr>
               ))}
