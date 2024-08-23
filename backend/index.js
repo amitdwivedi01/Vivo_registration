@@ -71,6 +71,7 @@ app.post('/api/register', upload.single('file'), async (req, res) => {
       influencerImpact: req.body.influencerImpact,
       favoriteV40Feature: req.body.favoriteV40Feature,
       setupAttraction: req.body.setupAttraction,
+      city: req.body.city, 
     });
 
     // Save user to MongoDB

@@ -23,10 +23,6 @@ const Admin = () => {
     const getUserData = async () => {
       try {
         const response = await axios.get("https://vivo-registration.onrender.com/api/users");
-<<<<<<< HEAD
-=======
-        // const response = await axios.get("http://localhost:5000/api/users");
->>>>>>> 298d430f8ad679ce22d83d25c3bd513a1985bc73
 
         if (response.status === 200) {
           const users = response.data.map((user, index) => ({
@@ -113,8 +109,8 @@ const Admin = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vivo Demo Helped</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Photo Upload Frequency</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Favorite Photo Type</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Social Media Time</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Purchase Preference</th>
+                {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Social Media Time</th> */}
+                {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Purchase Preference</th> */}
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Influencer Impact</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Favorite V40 Feature</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Setup Attraction</th>
@@ -142,10 +138,10 @@ const Admin = () => {
                   <td className="px-6 py-4 whitespace-nowrap">{user.experienceRating}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.zeissFactor}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.vivoDemoHelped}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.photoUploadFrequency}</td>
+                  {/* <td className="px-6 py-4 whitespace-nowrap">{user.photoUploadFrequency}</td> */}
                   <td className="px-6 py-4 whitespace-nowrap">{user.favoritePhotoType}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.socialMediaTime}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.purchasePreference}</td>
+                  {/* <td className="px-6 py-4 whitespace-nowrap">{user.socialMediaTime}</td> */}
+                  {/* <td className="px-6 py-4 whitespace-nowrap">{user.purchasePreference}</td> */}
                   <td className="px-6 py-4 whitespace-nowrap">{user.influencerImpact}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.favoriteV40Feature}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.setupAttraction}</td>

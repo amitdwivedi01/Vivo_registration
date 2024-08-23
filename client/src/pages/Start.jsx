@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/vivo_new_logo.png';
+import logo from '../assets/new_logo.png';
 import { Link } from 'react-router-dom';
 
 const Start = () => {

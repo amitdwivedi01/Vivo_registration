@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, TextInput, Modal, Spinner } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import logo from "../assets/vivo_new_logo.png";
+import logo from "../assets/new_logo.png";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -18,11 +18,10 @@ const Register = () => {
     vivoDemoHelped: "",
     photoUploadFrequency: "",
     favoritePhotoType: "",
-    socialMediaTime: "",
-    purchasePreference: "",
     influencerImpact: "",
     favoriteV40Feature: "",
     setupAttraction: "",
+    city: "", // Added city to the formData state
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -66,10 +65,6 @@ const Register = () => {
       }
       const response = await axios.post(
         "https://vivo-registration.onrender.com/api/register",
-<<<<<<< HEAD
-=======
-        // "http://localhost:5000/api/register",
->>>>>>> 298d430f8ad679ce22d83d25c3bd513a1985bc73
         NewFormData
       );
 
@@ -92,13 +87,11 @@ const Register = () => {
         experienceRating: "",
         zeissFactor: "",
         vivoDemoHelped: "",
-        photoUploadFrequency: "",
         favoritePhotoType: "",
-        socialMediaTime: "",
-        purchasePreference: "",
         influencerImpact: "",
         favoriteV40Feature: "",
         setupAttraction: "",
+        city: "", // Reset city field
       });
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -177,6 +170,29 @@ const Register = () => {
               </option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
+            </select>
+          </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="city">City:</label>
+            <select
+              id="city"
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+              required
+            >
+              <option value="" disabled>
+                Select your city
+              </option>
+              <option value="Bangalore">Bangalore</option>
+              <option value="Lucknow">Lucknow</option>
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Pune">Pune</option>
+              <option value="Ahmedabad">Ahmedabad</option>
+              <option value="Kochi">Kochi</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Kolkata">Kolkata</option>
             </select>
           </div>
           <div className="flex flex-col gap-1">
@@ -287,116 +303,6 @@ const Register = () => {
             </select>
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="vivoDemoHelped">
-              Did the phone demo help view vivo in a better way? Did the
-              imagery experience enhance perception of vivo?
-            </label>
-            <select
-              id="vivoDemoHelped"
-              name="vivoDemoHelped"
-              value={formData.vivoDemoHelped}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Select option
-              </option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="photoUploadFrequency">
-              How often do you upload photos on social media?
-            </label>
-            <select
-              id="photoUploadFrequency"
-              name="photoUploadFrequency"
-              value={formData.photoUploadFrequency}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Select frequency
-              </option>
-              <option value="Daily">Daily</option>
-              <option value="Weekly">Weekly</option>
-              <option value="Bi-monthly">Bi-monthly</option>
-              <option value="Never">Never</option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="favoritePhotoType">
-              What kind of photos do you like uploading of your own?
-            </label>
-            <select
-              id="favoritePhotoType"
-              name="favoritePhotoType"
-              value={formData.favoritePhotoType}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Select photo type
-              </option>
-              <option value="Group photos">Group photos</option>
-              <option value="Selfies">Selfies</option>
-              <option value="Portraits">Portraits</option>
-              <option value="Candids">Candids</option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="socialMediaTime">
-              How much time do you spend on social media in a day?
-            </label>
-            <select
-              id="socialMediaTime"
-              name="socialMediaTime"
-              value={formData.socialMediaTime}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Select time
-              </option>
-              <option value="1 Hr">1 Hr</option>
-              <option value="2 hr">2 hr</option>
-              <option value="3 hr">3 hr</option>
-              <option value="4 hr+">4 hr+</option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="purchasePreference">
-              Do you prefer buying your phone online or offline?
-            </label>
-            <select
-              id="purchasePreference"
-              name="purchasePreference"
-              value={formData.purchasePreference}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Select option
-              </option>
-              <option value="Online">Online</option>
-              <option value="Offline">Offline</option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="influencerImpact">
-              Do influencer/paid partnerships help in awareness or do you get
-              aware through news, site notifications, websites, etc.?
-            </label>
-            <select
-              id="influencerImpact"
-              name="influencerImpact"
-              value={formData.influencerImpact}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Select option
-              </option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-1">
             <label htmlFor="favoriteV40Feature">
               Which feature of V40/V40 Pro did you like the most?
             </label>
@@ -423,6 +329,62 @@ const Register = () => {
             </select>
           </div>
           <div className="flex flex-col gap-1">
+            <label htmlFor="vivoDemoHelped">
+              Did the phone demo help view vivo in a better way? Did the
+              imagery experience enhance perception of vivo?
+            </label>
+            <select
+              id="vivoDemoHelped"
+              name="vivoDemoHelped"
+              value={formData.vivoDemoHelped}
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                Select option
+              </option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="favoritePhotoType">
+              What kind of photos do you like uploading of your own?
+            </label>
+            <select
+              id="favoritePhotoType"
+              name="favoritePhotoType"
+              value={formData.favoritePhotoType}
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                Select photo type
+              </option>
+              <option value="Group photos">Group photos</option>
+              <option value="Selfies">Selfies</option>
+              <option value="Portraits">Portraits</option>
+              <option value="Candids">Candids</option>
+            </select>
+          </div>
+          
+          <div className="flex flex-col gap-1">
+            <label htmlFor="influencerImpact">
+              Do influencer/paid partnerships help in awareness or do you get
+              aware through news, site notifications, websites, etc.?
+            </label>
+            <select
+              id="influencerImpact"
+              name="influencerImpact"
+              value={formData.influencerImpact}
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                Select option
+              </option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div className="flex flex-col gap-1">
             <label htmlFor="setupAttraction">What attracted you to the setup?</label>
             <select
               id="setupAttraction"
@@ -434,17 +396,19 @@ const Register = () => {
                 Select attraction
               </option>
               <option value="Setup Design">Setup Design</option>
-              <option value="Photo Op">Photo Op</option>
+              <option value="Photo Op">Photo Zone</option>
               <option value="Product">Product</option>
               <option value="Emcee Engagement">Emcee Engagement</option>
               <option value="Activities">Activities</option>
               <option value="Gifts">Gifts</option>
               <option value="Announcement about the V40 Series">
-                Announcement about the V40 Series
+                Announcement about the Product
               </option>
               <option value="ZEISS Logo">ZEISS Logo</option>
             </select>
           </div>
+          
+          
           {isLoading ? (
             <Button className="bg-blue-600 hover:bg-blue-800" disabled>
               {" "}
