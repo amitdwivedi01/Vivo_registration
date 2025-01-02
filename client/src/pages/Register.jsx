@@ -193,6 +193,8 @@ const Register = () => {
               <option value="Chennai">Chennai</option>
               <option value="Mumbai">Mumbai</option>
               <option value="Kolkata">Kolkata</option>
+              <option value="Noida">Noida</option>
+              <option value="Jaipur">Jaipur</option>
             </select>
           </div>
           <div className="flex flex-col gap-1">
