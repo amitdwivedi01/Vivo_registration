@@ -1,6 +1,6 @@
-import React from 'react';
-import logo from '../assets/new_logo.png';
-import { Link } from 'react-router-dom';
+import React from "react";
+import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const Start = () => {
   return (
@@ -15,7 +15,7 @@ const Start = () => {
         <Link to="/register">
           <button
             className="bg-white hover:bg-gray-200 text-blue-600 font-bold py-3 shadow-lg px-[60px] text-3xl rounded-lg transition-colors duration-300"
-            style={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}
+            style={{ boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
           >
             Register
           </button>
