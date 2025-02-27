@@ -69,6 +69,7 @@ app.post("/api/register", upload.single("file"), async (req, res) => {
       handset: req.body.handset,
       usage_duration: req.body.usage_duration,
       phonePurchase: req.body.phonePurchase,
+      other_phonePurchase: req.body.other_phonePurchase,
       features: req.body.features,
       cameraMode: req.body.cameraMode,
       weddingFeature: req.body.weddingFeature,

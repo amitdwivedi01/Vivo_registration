@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
   handset: { type: String },
   usage_duration: { type: String },
   phonePurchase: { type: String },
+  other_phonePurchase: { type: String },
   features: { type: String },
   cameraMode: { type: String },
   weddingFeature: { type: String },
