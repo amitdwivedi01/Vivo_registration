@@ -1,24 +1,29 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  name: { type: String },
-  age: { type: String },
+  name: { type: String, required: true },
+  contact: { type: String, required: true },
   gender: { type: String },
-  profession: { type: String },
-  contact: { type: String }, // Changed from mobile to contact
-  email: { type: String },
-  handset: { type: String },
-  x200_awareness: { type: String },
-  source: { type: String }, // Added source field
+  age: { type: String },
   state: { type: String },
-  photography_interest: { type: String }, // Added photography_interest field
-  photograph_type: { type: [String] }, // Changed to array for photograph_type
-  go_out_for_photography: { type: String },
-  visitReason: { type: String },
-  other_profession: { type: String },
-  other_handset: { type: String },
-  other_source: { type: String },
-  other_visitReason: { type: String },
+  purchaseDecision: { type: String },
+  profession: { type: String },
+  handset: { type: String },
+  usage_duration: { type: String },
+  phonePurchase: { type: String },
+  features: { type: String },
+  cameraMode: { type: String },
+  weddingFeature: { type: String },
+  vzCollab: { type: String },
+  weddingClick: { type: String },
+  selfCapture: { type: String },
+  weddingPhotographyEngagement: { type: String },
+  favoriteEvent: { type: String },
+  futureFeatures: { type: String },
+  weddingPhotographyAwareness: { type: String },
+  weddingScenario: { type: String },
+  v50Photography: { type: String },
+  v50NextPurchase: { type: String },
   timestamp: { type: Date, default: Date.now },
 });
 
