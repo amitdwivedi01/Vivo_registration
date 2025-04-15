@@ -165,7 +165,7 @@ const Admin = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   state
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Age
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -194,7 +194,7 @@ const Admin = () => {
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Go Out for Photography
-                </th>
+                </th> */}
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Timestamp
                 </th>
@@ -209,7 +209,7 @@ const Admin = () => {
                     {user.contact}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.state}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.age}</td>
+                  {/* <td className="px-6 py-4 whitespace-nowrap">{user.age}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.gender}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {user.profession === "Others"
@@ -245,7 +245,7 @@ const Admin = () => {
 
                   <td className="px-6 py-4 whitespace-nowrap">
                     {user.go_out_for_photography}
-                  </td>
+                  </td> */}
                   <td className="px-6 py-4 whitespace-nowrap">
                     {new Date(user.timestamp).toLocaleDateString("en-GB")}
                   </td>
