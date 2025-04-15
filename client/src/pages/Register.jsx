@@ -7,23 +7,23 @@ import logo from "../assets/logo.png";
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
-    age: "",
-    gender: "",
-    profession: "",
+    // age: "",
+    // gender: "",
+    // profession: "",
     contact: "",
     email: "",
-    handset: "",
-    x200_awareness: "",
-    source: "",
+    // handset: "",
+    // x200_awareness: "",
+    // source: "",
     state: "",
-    photography_interest: "",
-    photograph_type: [],
-    go_out_for_photography: "",
-    visitReason: "",
-    other_profession: "",
-    other_handset: "",
-    other_source: "",
-    other_visitReason: "",
+    // photography_interest: "",
+    // photograph_type: [],
+    // go_out_for_photography: "",
+    // visitReason: "",
+    // other_profession: "",
+    // other_handset: "",
+    // other_source: "",
+    // other_visitReason: "",
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -78,8 +78,8 @@ const Register = () => {
         NewFormData.append(key, formData[key]);
       }
       const response = await axios.post(
-        // "https://vivo-registration.onrender.com/api/register",
-        "http://localhost:5000/api/register",
+        "https://vivo-registration.onrender.com/api/register",
+        // "http://localhost:5000/api/register",
         NewFormData
       );
 
@@ -93,23 +93,23 @@ const Register = () => {
 
       setFormData({
         name: "",
-        age: "",
-        gender: "",
+        // age: "",
+        // gender: "",
         contact: "",
         email: "",
-        profession: "",
-        handset: "",
+        // profession: "",
+        // handset: "",
         state: "",
-        x200_awareness: "",
-        source: "",
-        photography_interest: "",
-        photograph_type: [],
-        go_out_for_photography: "",
-        visitReason: "",
-        other_profession: "",
-        other_handset: "",
-        other_source: "",
-        other_visitReason: "",
+        // x200_awareness: "",
+        // source: "",
+        // photography_interest: "",
+        // photograph_type: [],
+        // go_out_for_photography: "",
+        // visitReason: "",
+        // other_profession: "",
+        // other_handset: "",
+        // other_source: "",
+        // other_visitReason: "",
       });
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -128,7 +128,7 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-blue-600 flex flex-col items-center h-full w-full">
+    <div className="bg-blue-600 flex flex-col items-center h-screen w-full">
       <div className="flex justify-center py-4">
         <img
           src={logo}
@@ -179,7 +179,7 @@ const Register = () => {
               required
             />
           </div>
-          <div className="flex flex-col gap-1">
+          {/* <div className="flex flex-col gap-1">
             <label htmlFor="age">Age:</label>
             <select
               id="age"
@@ -213,7 +213,7 @@ const Register = () => {
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select>
-          </div>
+          </div> */}
           <div className="flex flex-col gap-1">
             <label htmlFor="state">What state do you currently live in ?</label>
             <select
@@ -226,8 +226,9 @@ const Register = () => {
               <option value="" disabled>
                 Select your state
               </option>
+              <option value="KTPO">KTPO</option>
               <option value="Mumbai">Mumbai</option>
-              <option value="Gujrat">Gujrat</option>
+              {/* <option value="Gujrat">Gujrat</option>
               <option value="Uttar Pradesh">Uttar Pradesh</option>
               <option value="West Bengal">West Bengal </option>
               <option value="Karnataka">Karnataka</option>
@@ -237,10 +238,10 @@ const Register = () => {
               <option value="Rajasthan">Rajasthan</option>
               <option value="Kerala">Kerala</option>
               <option value="Panjab">Panjab</option>
-              <option value="Delhi">Delhi</option>
+              <option value="Delhi">Delhi</option> */}
             </select>
           </div>
-          <div className="flex flex-col gap-1">
+          {/* <div className="flex flex-col gap-1">
             <label htmlFor="profession">Profession:</label>
             <select
               id="profession"
@@ -588,7 +589,7 @@ const Register = () => {
               />
               <label htmlFor="go-out-no">No</label>
             </div>
-          </div>
+          </div> */}
 
           {isLoading ? (
             <button

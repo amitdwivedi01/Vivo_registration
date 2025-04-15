@@ -65,7 +65,7 @@ const Admin = () => {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/users");
+        const response = await axios.get("https://vivo-registration.onrender.com/api/users");
 
         if (response.status === 200) {
           const users = response.data.map((user, index) => ({

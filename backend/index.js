@@ -63,6 +63,7 @@ app.post("/api/register", upload.single("file"), async (req, res) => {
       contact: req.body.contact,
       gender: req.body.gender,
       age: req.body.age,
+      email:req.body.email,
       state: req.body.state,
       purchaseDecision: req.body.purchaseDecision,
       profession: req.body.profession,
