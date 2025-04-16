@@ -61,39 +61,46 @@ const Admin = () => {
     XLSX.utils.book_append_sheet(wb, ws, "UserData");
     XLSX.writeFile(wb, filename);
   };
+  const getUserData = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        "https://vivo-registration.onrender.com/api/users"
+      );
+
+      if (response.status === 200) {
+        const users = response.data.map((user, index) => ({
+          ...user,
+          index, // Preserve original index
+        }));
+        setUserData(users);
+        const cities = [...new Set(users.map((user) => user.state))];
+        setUniqueCities(cities);
+        const dates = [
+          ...new Set(
+            users.map((user) =>
+              user.timestamp ? user.timestamp.split("T")[0] : null
+            )
+          ),
+        ];
+        setUniqueDates(dates.filter((date) => date !== null)); // Filter out null values
+      } else {
+        alert("Error loading data");
+      }
+    } catch (error) {
+      alert("Error: " + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const response = await axios.get("https://vivo-registration.onrender.com/api/users");
-
-        if (response.status === 200) {
-          const users = response.data.map((user, index) => ({
-            ...user,
-            index, // Preserve original index
-          }));
-          setUserData(users);
-          const cities = [...new Set(users.map((user) => user.state))];
-          setUniqueCities(cities);
-          const dates = [
-            ...new Set(
-              users.map((user) =>
-                user.timestamp ? user.timestamp.split("T")[0] : null
-              )
-            ),
-          ];
-          setUniqueDates(dates.filter((date) => date !== null)); // Filter out null values
-        } else {
-          alert("Error loading data");
-        }
-      } catch (error) {
-        alert("Error: " + error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
     getUserData();
   }, []);
+
+  const handleRefresh = async () => {
+    await getUserData();
+  };
 
   // Filter user data based on selected state and date
   const filteredUserData = userData
@@ -148,6 +155,7 @@ const Admin = () => {
               </select>
               <h2 className="mr-4 text-md">Count: {filteredUserData.length}</h2>
               <Button onClick={handleExportToExcel}>Export to Excel</Button>
+              <Button onClick={handleRefresh}>Refresh Data</Button>
             </div>
           </div>
           <table className="min-w-full divide-y divide-gray-200">
@@ -163,7 +171,10 @@ const Admin = () => {
                   Contact
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  state
+                  State
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Rating
                 </th>
                 {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Age
@@ -209,6 +220,7 @@ const Admin = () => {
                     {user.contact}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.state}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{user.rating}</td>
                   {/* <td className="px-6 py-4 whitespace-nowrap">{user.age}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.gender}</td>
                   <td className="px-6 py-4 whitespace-nowrap">

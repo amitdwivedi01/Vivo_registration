@@ -16,6 +16,7 @@ const Register = () => {
     // x200_awareness: "",
     // source: "",
     state: "",
+    rating: "",
     // photography_interest: "",
     // photograph_type: [],
     // go_out_for_photography: "",
@@ -44,7 +45,7 @@ const Register = () => {
           [name]: updatedPhotographTypes,
         };
       });
-    } else if (name === "mobile") {
+    } else if (name === "contact") {
       if (value.length > 10) {
         setFormData((prevState) => ({
           ...prevState,
@@ -100,6 +101,7 @@ const Register = () => {
         // profession: "",
         // handset: "",
         state: "",
+        rating: "",
         // x200_awareness: "",
         // source: "",
         // photography_interest: "",
@@ -163,8 +165,7 @@ const Register = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Enter your email"
-              required
+              placeholder="Enter your email (Optional)"
             />
           </div>
           <div>
@@ -241,6 +242,29 @@ const Register = () => {
               <option value="Delhi">Delhi</option> */}
             </select>
           </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="experience">
+              On a scale of 1 to 10, how would you rate the experience of the
+              setup?
+            </label>
+            <select
+              id="rating"
+              name="rating"
+              value={formData.rating}
+              onChange={handleChange}
+              required
+            >
+              <option value="" disabled>
+                Select a rating
+              </option>
+              {[...Array(10)].map((_, i) => (
+                <option key={i + 1} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* <div className="flex flex-col gap-1">
             <label htmlFor="profession">Profession:</label>
             <select
